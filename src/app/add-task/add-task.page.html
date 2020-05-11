@@ -1,0 +1,7 @@
+<ion-content>
+  <app-header [hasClose]="true" (closeClicked)="dimiss()" [title]="'Add a new task'">
+  </app-header>
+  <form style="display: flex; padding: 1rem;">
+    <ion-input class="input" (ionChange)="onChange($event)" placeholder="What would you like to achieve?"></ion-input>
+  </form>
+</ion-content>

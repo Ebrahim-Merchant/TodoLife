@@ -1,20 +1,38 @@
-<ion-tabs>
-
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab2">
-      <ion-icon name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-
-</ion-tabs>
+<ion-content [fullscreen]="true">
+  <app-header
+    [isLanding]="true"
+    [title]="'Let\'s plan'"
+    [subtitle]="'Your favorite list'">
+    <div class="position">
+        <div class="card-list">
+            <app-favorite-list-card
+              (click)="router.navigate(['/list', listItem.id], { queryParams: { color: listItem.color }})"
+              [routerLink]="['/list', listItem.id]"
+              *ngFor="let listItem of list | async"
+              [title]="listItem.listName"
+              [subtitle]="listItem.pending + ' of ' + listItem.count + ' items'"
+              [color]="listItem.color"
+              [iconName]="listItem.iconName">
+            </app-favorite-list-card>
+          </div>
+    </div>
+  </app-header>
+  <div class="body">
+      <ion-label class="heading">All Tasks</ion-label>
+      <ion-list>
+          <ion-item *ngFor="let todoItem of todoList | async" (click)='todoItem.status != todoItem.status' [ngStyle]="{'text-decoration: line-through': todoItem.status }" >
+          <ion-checkbox [checked]='todoItem.status'></ion-checkbox>
+          <ion-label style="padding: 1rem;">{{todoItem.taskTitle}}</ion-label>
+          <ion-label style="font: normal 11px/14px Segoe UI;">{{todoItem.dueDate}}</ion-label>
+          <ion-chip [ngStyle]="{'background-color': todoItem.color , color: 'white'}">
+            <ion-label>{{ todoItem.listName }}</ion-label>
+          </ion-chip>
+            </ion-item>
+      </ion-list>
+  </div>
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addTodoItem()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

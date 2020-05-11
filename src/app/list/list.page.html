@@ -1,0 +1,19 @@
+<ion-content *ngIf="(listPage | async) as lists"
+[style.-ion-color-primary]="'#fff'">
+  <app-header
+    [hasBack]="true"
+    (backClicked)="location.back()"
+    [title]="lists.list.listName + ' List'"
+    [subtitle]="lists.list.finished + ' of ' + lists.list.count + ' items done'">
+  </app-header>
+  <ion-list>
+    <ion-item *ngFor="let todoItem of lists.todo" (click)='todoItem.status != todoItem.status' [ngStyle]="{'text-decoration: line-through': todoItem.status }" >
+    <ion-checkbox [checked]='todoItem.status'></ion-checkbox>
+    <div style="padding:1rem;" [ngStyle]="{'padding': todoItem.dueDate ? '1rem' : '1.5rem 1rem'}">
+        <ion-label>{{todoItem.taskTitle}}</ion-label>
+        <ion-label style="font: normal 11px/14px Segoe UI;">{{todoItem.dueDate}}</ion-label>
+    </div>
+
+      </ion-item>
+</ion-list>
+</ion-content>
