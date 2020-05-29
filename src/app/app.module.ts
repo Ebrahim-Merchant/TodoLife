@@ -1,6 +1,9 @@
+import { AppService } from 'src/app/state/app.service';
+import { ModalModule } from './../shared/modals/modal.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -14,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './state/app.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 export const reducer = {
@@ -26,8 +30,10 @@ export const reducer = {
   entryComponents: [],
   imports: [
     BrowserModule,
+    IonicStorageModule.forRoot(),
     StoreModule.forRoot({}),
     HttpClientModule,
+    ModalModule,
     AngularFireModule.initializeApp(environment.firebase),
     IonicModule.forRoot(),
     AppRoutingModule,

@@ -1,203 +1,75 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { getTodoList, getList } from './app.selector';
+import { map } from 'rxjs/operators';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of, from, Subscription } from 'rxjs';
+import { Storage } from '@ionic/storage';
+import { Store } from '@ngrx/store';
 
 export interface ITodo {
-    id: number;
+    id: string;
     taskTitle: string;
-    extra: any;
-    listId: number;
+    extraDetails: string;
+    listId: string;
     status: boolean;
     dueDate: string;
-    listName: string;
+    listName?: string;
 }
 
 export interface IList {
-    id: number;
+    id: string;
     listName: string;
     count: number;
-    finished: number;
-    pending: number;
+    completed: number;
+    color: string;
   }
 
 
 @Injectable({providedIn: 'root'})
-export class AppService {
-    constructor() { }
+export class AppService implements OnDestroy {
 
-    list: IList[] = [
-        {
-            id: 1,
-            listName: 'Grocery',
-            count: 5,
-            finished: 2,
-            pending: 3
-        },
-        {
-            id: 2,
-            listName: 'Personal',
-            count: 24,
-            finished: 10,
-            pending: 14
-        },
-        {
-            id: 3,
-            listName: 'Work',
-            count: 24,
-            finished: 10,
-            pending: 14
-        }
-    ];
+    private list: IList[] = [];
 
-    todo: ITodo[] = [
-        {
-            id: 1,
-            taskTitle: 'Send Email',
-            extra: {},
-            listId: 2,
-            listName: 'Personal',
-            status: false,
-            dueDate: null
-        },
-        {
-            id: 2,
-            taskTitle: 'Buy milk',
-            extra: {},
-            listId: 1,
-            status: false,
-            listName: 'Grocery',
-            dueDate: '09/10/2020'
-        }
-    ];
+    sub: Subscription[] = [];
+    private todo: ITodo[] = [];
+    constructor(private storage: Storage, private store: Store<any>) {
+        this.updateList();
+        this.updateTodo();
+    }
 
-    todoListwithId =  {
-        list: {
-            id: 2,
-            listName: 'LIST',
-            count: 5,
-            finished: 2,
-            pending: 3
-        },
-        todo: [
-            {
-                id: 1,
-                taskTitle: 'Send Email',
-                extra: {},
-                listId: 2,
-                status: false,
-                dueDate: null
-            },
-            {
-                id: 2,
-                taskTitle: 'Buy milk',
-                extra: {},
-                listId: 1,
-                status: false,
-                dueDate: '09/10/2020'
-            }
-        ]
-    };
-
-    getTodo(listId?: number): Observable<ITodo[] | any> {
-        if (listId) {
-            return of(this.todoListwithId);
-        }
-        return of(this.todo);
+    getTodo(): Observable<ITodo[] | any> {
+        return from(this.storage.get('todoList')).pipe(
+            map((todoList) => todoList ? todoList : [])
+        );
     }
 
     getList(): Observable<IList[]> {
-        return of(this.list);
+        return from(this.storage.get('lists')).pipe(
+            map((list) => list ? list : [])
+        );
     }
+
+    updateTodo(todo?: ITodo[]) {
+       const sub1 = this.store.select(getTodoList)
+       .subscribe((todoList) => {
+        console.log(todoList);
+        this.storage.set('todoList', todoList); }
+       );
+       this.sub.push(sub1);
+    }
+
+    updateList(list?: IList[]) {
+        const sub2 = this.store.select(getList)
+                .subscribe((lists) => this.storage.set('lists', lists));
+        this.sub.push(sub2);
+    }
+
+    ngOnDestroy(): void {
+        this.sub.forEach(subs => {
+            if (!subs.closed) {
+                subs.unsubscribe();
+            }
+        });
+    }
+
 
 }
-/*
-endpoint: needed /lists
-METHOD: GET
-example: lists: [
-    {
-        id: 1,
-        listName: Grocery,
-        count: 5,
-        finished: 2,
-        pending: 3
-    },
-    {
-        id: 2,
-        listName: Personal,
-        count: 24,
-        finished: 10,
-        pending: 14
-    }
-]
-
-endpoint: needed /todo,
-METHOD: GET
-example: todo: [
-    {
-        id: 1;
-        taskTitle: "Send Email";
-        extra: {};
-        listId: 2;
-        status: false;
-        dueDate: null;
-    },
-    {
-        id: 2;
-        taskTitle: "Buy milk";
-        extra: {};
-        listId: 1;
-        status: false;
-        dueDate: "09/10/2020"
-    }
-]
-
-endpoint: needed /todo/:listId:
-METHOD: GET,
-example: {
-    list: {
-        id: 2,
-        name: "Grocery"
-    }
-    todo: [
-        {
-            id: 1;
-            taskTitle: "Send Email";
-            extra: {};
-            listId: 2;
-            status: false;
-            dueDate: null;
-        },
-        {
-            id: 2;
-            taskTitle: "Buy milk";
-            extra: {};
-            listId: 1;
-            status: false;
-            dueDate: "09/10/2020"
-        }
-    ]
-}
-
-endpoint: needed /todo/
-METHOD: POST,
-example: {
-    todoItem: {
-        taskTitle: "Buy bread";
-        extra: {};
-        listId: 2;
-        status: false;
-        dueDate: "09/10/2020"
-    }
-}
-
-endpoint: needed /todo/
-METHOD: PUT,
-example: {
-    todoItem: {
-        id: 2;
-        status: true;
-    }
-}
-
-endpoint: needed /todo/:todoId
-METHOD: DELETE
-*/

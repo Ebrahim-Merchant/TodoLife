@@ -1,28 +1,25 @@
+
+
 :host {
     $primary: var(--ion-color-primary);
     $primary-shade: var(--ion-color-primary-shade);
-    .primary {
-        $primary: var(--ion-color-primary);
-        $primary-shade: var(--ion-color-primary-shade);
-    }
-    
-    .secondary {
-        $primary: var(--ion-color-primary);
-        $primary-shade: var(--ion-color-primary-shade);
-    }
+
+    $secondary: var(--ion-color-secondary);
+    $secondary-shade: var(--ion-color-secondary-shade);
+
+
     
     .header {
         height: 8rem;
         display: flex;
         border-radius: 0 0 3rem 0;
         background: transparent linear-gradient(180deg, $primary 0%, $primary-shade 100%) 0% 0% no-repeat padding-box;
-        opacity: 1;
-        justify-content: center;
+        &.secondary {
+            background: transparent linear-gradient(180deg, $secondary 0%, $secondary-shade 100%) 0% 0% no-repeat padding-box;
+        }
         align-items: center;
 
         &.landing {
-            --ion-color-primary: #3880ff;
-            --ion-color-primary-shade: #3171e0;
             position: fixed;
             width: 100%;
             flex-direction: column;
@@ -72,22 +69,24 @@
         }
 
         .back {
-            position: fixed;
-            width: 22px;
+            width: 10%;
+            margin: 1rem;
             height: 22px;
-            left: 1.25rem;
             background: url("./../../assets/icon/Icon\ material-arrow_back.svg") no-repeat center center;
         }
         .close {
-            position: fixed;
-            width: 22px;
-            height: 22px;
-            left: 1.25rem;
+            margin: 1rem;
             ion-icon {
                 width: 2rem;
                 height: 2rem;
                 color: white;
             }
+        }
+        .edit {
+            font: bold 16px/21px Segoe UI;
+            color: white;
+            margin-left: auto;
+            padding: 1rem;
         }
 
         .increase {

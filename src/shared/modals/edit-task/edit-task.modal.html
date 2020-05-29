@@ -1,0 +1,64 @@
+<ion-content>
+  <app-header [hasClose]="true" (closeClicked)="dimiss()" [title]="'Edit task'">
+  </app-header>
+
+  <form
+    class="form-container"
+    #editTaskForm="ngForm"
+    (ngSubmit)="onSave(editTaskForm)">
+    <ion-item>
+      <ion-label color="dark-tint">Selected</ion-label>
+      <ion-checkbox
+        [(checked)]="todo.selected"
+        (ionChange)="todo.selected =!todo.selected"
+        mode="ios"
+        slot="end">
+      </ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark-tint" position="floating"
+        >Task Name <span class="danger">*</span></ion-label>
+      <ion-input
+        [(ngModel)]="todo.taskTitle"
+        required="true"
+        name="taskTitle">
+      </ion-input>
+    </ion-item>
+    <ion-label
+      *ngIf="editTaskForm?.controls?.taskTitle?.errors && editTaskForm?.controls?.taskTitle?.touched"
+      color="danger error-message">
+      This is a required value
+    </ion-label>
+
+    <ion-item>
+      <ion-label color="dark-tint" position="floating">Add details</ion-label>
+      <ion-input [(ngModel)]="todo.extraDetails" name="extra"> </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Due Date</ion-label>
+      <ion-datetime
+        [(ngModel)]="todo.dueDate"
+        name="dueDate"
+        displayFormat="D MMM YYYY"
+        placeholder="MM DD YY">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="dark-tint" position="floating">List</ion-label>
+      <ion-select [value]="todo.listId" [(ngModel)]="todo.listId" name="listid">
+        <ion-select-option
+          *ngFor="let listItem of list | async"
+          [value]="listItem.id">
+          {{listItem.listName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button type="submit" class="form-button"> Save Task </ion-button>
+    <ion-button color="danger" (click)="onDelete()" class="form-button bottom">
+      Delete Task
+    </ion-button>
+  </form>
+</ion-content>

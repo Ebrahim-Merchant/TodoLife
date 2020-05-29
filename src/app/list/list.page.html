@@ -1,16 +1,40 @@
 <ion-content *ngIf="(listPage | async) as lists">
   <app-header
+    [isPrimary]="false"
     [hasBack]="true"
+    [hasEdit]="true"
+    (editClicked)="utilsService.showEditListModal({componentProps: { list: lists.list}})"
     (backClicked)="location.back()"
     [title]="lists.list.listName + ' List'"
-    [subtitle]="lists.list.finished + ' of ' + lists.list.count + ' items done'">
+    [subtitle]="lists.list.completed + ' of ' + lists.list.count + ' items done'">
+    <ion-segment color="secondary" (ionChange)="segmentChanged($event)" value="all">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completed">
+        <ion-label>Completed</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pending">
+        <ion-label>Pending</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </app-header>
   <ion-list>
-    <app-list-item
-    *ngFor="let todoItem of lists.todo"
-    [(checked)]='todoItem.status'
-    [taskTitle]='todoItem.taskTitle'
-    [additionalInfo]='todoItem.dueDate'>
-    </app-list-item>
-</ion-list>
+      <app-list-item
+      *ngFor="let todoItem of lists.todo"
+      [colorStyle]="'secondary'"
+      [(checked)]='todoItem.status'
+      (checkedChange)="onCheckChange(todoItem)"
+      (divClicked)="utilsService.showEditTaskModal({ componentProps: { todo: todoItem}})"
+      [taskTitle]='todoItem.taskTitle'
+      [additionalInfo]='todoItem.extraDetails'
+      [dueDate]='todoItem.dueDate'>
+      </app-list-item>
+  </ion-list>
+
+<ion-fab color="secondary" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="secondary" (click)="utilsService.showAddTaskModal({componentProps: { listValue: lists.list.id }})">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>

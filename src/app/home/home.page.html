@@ -1,0 +1,64 @@
+<ion-content [fullscreen]="true">
+  <div class="grid-container">
+    <app-header
+      class="header"
+      [isLanding]="true"
+      [title]="'Let\'s plan'"
+      [subtitle]="'Your lists'">
+    </app-header>
+
+    <div class="card-list">
+      <app-favorite-list-card
+        [routerLink]="['/list', listItem.id]"
+        [queryParams]="{ color: listItem.color }"
+        *ngFor="let listItem of list | async"
+        [title]="listItem.listName"
+        [subtitle]="listItem.completed + ' of ' + listItem.count + ' items'"
+        [color]="listItem.color"
+        [iconName]="listItem.iconName">
+      </app-favorite-list-card>
+      <app-favorite-list-card
+        [title]="'Add a list'"
+        (click)="utilsService.showAddListModal()"
+        [iconName]="'add'">
+      </app-favorite-list-card>
+    </div>
+  
+    <div class="body" *ngIf="(todoList | async) as todo">
+      <ion-label class="heading">Tasks</ion-label>
+      <ion-segment
+        (ionChange)="segmentChanged($event, todo)"
+        [value]="filter | async" >
+        <ion-segment-button value="all">
+          <ion-label>All</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="completed">
+          <ion-label>Completed</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pending">
+          <ion-label>Pending</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <ion-list>
+        <app-list-item
+          *ngFor="let todoItem of todo"
+          [(checked)]="todoItem.status"
+          (checkedChange)="onCheckChange(todoItem)"
+          (divClicked)="utilsService.showEditTaskModal({ componentProps: { todo: todoItem}})"
+          [taskTitle]="todoItem.taskTitle"
+          [additionalInfo]="todoItem.extraDetails"
+          [dueDate]="todoItem.dueDate"
+          [color]="listItem.hasOwnProperty(todoItem.listId) ? listItem[todoItem.listId].color : null"
+          [listName]="listItem.hasOwnProperty(todoItem.listId) ? listItem[todoItem.listId].listName : null"
+        >
+        </app-list-item>
+      </ion-list>
+    </div>
+
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="utilsService.showAddTaskModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

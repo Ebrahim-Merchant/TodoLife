@@ -1,0 +1,7 @@
+@import "./../../scss/container";
+
+:host {
+    .form-container {
+        @include flex-form-container;
+    }
+}
