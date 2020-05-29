@@ -16,6 +16,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
     IonicModule,
     AppHeaderModule,
     CommonModule,
+    ListPageModule,
     TabsPageRoutingModule,
     AddTaskPageModule,
     FormsModule  ],

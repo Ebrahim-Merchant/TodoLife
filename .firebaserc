@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todora-app": {
+      "hosting": {
+        "app": [
+          "todora-app"
+        ]
+      }
+    }
+  }
+}

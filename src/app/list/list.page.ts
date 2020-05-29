@@ -36,8 +36,8 @@ export class ListPage implements OnInit {
       takeWhile((queryMap) => queryMap.has('color'))
     ).subscribe((queryMap) => {
         const color = queryMap.get('color');
-        document.body.style.setProperty('--ion-color-primary', color);
-        document.body.style.setProperty('--ion-color-primary-shade',  this.colorService.LightenDarkenColor(color, 20));
+        document.body.style.setProperty('--ion-color-secondary', color);
+        document.body.style.setProperty('--ion-color-secondary-shade',  this.colorService.LightenDarkenColor(color, 20));
       });
   }
 

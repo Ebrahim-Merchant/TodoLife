@@ -71,8 +71,8 @@ export class AppService {
 
     todoListwithId =  {
         list: {
-            id: 1,
-            listName: 'Grocery',
+            id: 2,
+            listName: 'LIST',
             count: 5,
             finished: 2,
             pending: 3

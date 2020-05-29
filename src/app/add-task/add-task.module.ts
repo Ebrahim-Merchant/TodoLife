@@ -8,12 +8,15 @@ import { IonicModule } from '@ionic/angular';
 import { AddTaskPageRoutingModule } from './add-task-routing.module';
 
 import { AddTaskPage } from './add-task.page';
+import { ColorPickerModule } from 'ngx-color-picker';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     AppHeaderModule,
+    ColorPickerModule,
     IonicModule,
     AddTaskPageRoutingModule
   ],

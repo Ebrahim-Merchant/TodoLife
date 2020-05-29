@@ -1,0 +1,11 @@
+<ion-item 
+  (click)='checkedChange.emit(!checked)'>
+  <ion-checkbox mode="ios" [checked]='checked'></ion-checkbox>
+  <div style="margin-right: auto;" [ngStyle]="{'padding': additionalInfo ? '1rem' : '1.5rem 1rem'}">
+      <ion-label>{{ taskTitle }}</ion-label>
+      <ion-label style="font: normal 11px/14px Segoe UI;">{{additionalInfo}}</ion-label>
+  </div>
+  <ion-chip *ngIf="listName && color" [ngStyle]="{'background-color': color , color: 'white'}">
+    <ion-label>{{ listName }}</ion-label>
+  </ion-chip>
+</ion-item>

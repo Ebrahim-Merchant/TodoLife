@@ -1,3 +1,5 @@
+import { AppService } from './../state/app.service';
+import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
@@ -6,24 +8,21 @@ import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: './add-task.page.html',
   styleUrls: ['./add-task.page.scss'],
 })
-export class AddTaskPage implements OnInit, OnChanges {
+export class AddTaskPage implements OnInit {
 
+  list: Observable<any>;
+  color: any;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private appService: AppService) { }
 
-  value: string = 'something';
-  ngOnInit() {}
+  ngOnInit() {
+    this.list = this.appService.getList();
+  }
 
   dimiss() {
     this.modalController.dismiss({
-      'dismissed': true
-    });  }
-
-    onChange(value) {
-      console.log(value);
-    }
-    ngOnChanges(changes: SimpleChanges): void {
-      console.log(changes);
-    }
+      dismissed: true
+    });
+  }
 
 }

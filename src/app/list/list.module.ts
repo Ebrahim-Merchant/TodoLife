@@ -1,3 +1,4 @@
+import { ListItemComponent } from './list-item/list-item.component';
 import { AppHeaderModule } from './../app-header/app-header.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,8 +19,9 @@ import { ListPage } from './list.page';
     ListPageRoutingModule
   ],
   exports: [
-    ListPage
+    ListPage,
+    ListItemComponent
   ],
-  declarations: [ListPage]
+  declarations: [ListPage, ListItemComponent]
 })
 export class ListPageModule {}

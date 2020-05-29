@@ -1,5 +1,14 @@
 :host {
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            "header header header header header header"
+            "position position position position position position"
+            "body body body body body body";
+    }
+
     .position {
+        grid-area: position;
         padding-top: 5rem;
         .card-list {
             display: flex;
@@ -7,12 +16,33 @@
             overflow: auto;
         }
     }
-   
+
+    @media (min-width: 1000px) {
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                "header header header header header header"
+                "position body body body body body";
+        }
+
+        .position {
+            padding-top: 7rem;
+            .card-list {
+                flex-direction: column;
+            }
+        }
+
+        .body {
+            padding-top: 8rem;
+            margin: 2rem;
+        }
+    }
 
     .body {
+        grid-area: body;
         display: flex;
         flex-direction: column;
-        .heading{
+        .heading {
             font: 33px/43px Segoe UI;
             color: #707070;
             padding: 1rem 1rem;
