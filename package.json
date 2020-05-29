@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy:github": "ng build --base-href 'https://ebrahim-merchant.github.io/Todora/' --prod && npx ngh --no-silent --dir=www/"
   },
   "private": true,
   "dependencies": {

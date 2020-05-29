@@ -27,7 +27,7 @@ export class UtilService {
 
   constructor(private modalController: ModalController) { }
 
-  async showAddTaskModal(props) {
+  async showAddTaskModal(props?) {
     const modal = await this.modalController.create({
       component: AddTaskModal,
       ...props
@@ -35,7 +35,7 @@ export class UtilService {
     return await modal.present();
   }
 
-  async showAddListModal(props) {
+  async showAddListModal(props?) {
     const modal = await this.modalController.create({
       component: AddListModal,
       ...props
@@ -44,7 +44,7 @@ export class UtilService {
   }
 
 
-  async showEditTaskModal(props) {
+  async showEditTaskModal(props?) {
     const modal = await this.modalController.create({
       component: EditTaskModal,
       ...props
@@ -52,7 +52,7 @@ export class UtilService {
     return await modal.present();
   }
 
-  async showEditListModal(props) {
+  async showEditListModal(props?) {
     const modal = await this.modalController.create({
       component: EditListModal,
       ...props

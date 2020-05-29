@@ -7,10 +7,10 @@
     #editTaskForm="ngForm"
     (ngSubmit)="onSave(editTaskForm)">
     <ion-item>
-      <ion-label color="dark-tint">Selected</ion-label>
+      <ion-label color="dark-tint">Status</ion-label>
       <ion-checkbox
-        [(checked)]="todo.selected"
-        (ionChange)="todo.selected =!todo.selected"
+        [checked]="todo.status"
+        (ionChange)="todo.status = !todo.status"
         mode="ios"
         slot="end">
       </ion-checkbox>

@@ -27,7 +27,7 @@
     <div class="body" *ngIf="(todoList | async) as todo">
       <ion-label class="heading">Tasks</ion-label>
       <ion-segment
-        (ionChange)="segmentChanged($event, todo)"
+        (ionChange)="segmentChanged($event)"
         [value]="filter | async" >
         <ion-segment-button value="all">
           <ion-label>All</ion-label>
