@@ -13,7 +13,7 @@
   >
     <ion-item>
       <ion-label color="dark-tint" position="floating"
-        >List Name <span style="color: red;">*</span></ion-label
+        >List Name <span color="danger">*</span></ion-label
       >
       <ion-input
         [(ngModel)]="list.listName"
@@ -30,6 +30,10 @@
     <ion-item>
       <ion-label color="dark-tint">Color</ion-label>
       <input
+        readonly
+        [cpPosition]="'left'"
+        [cpPositionOffset]="'50%'"
+        [cpPositionRelativeToArrow]="true"
         style="width: 20%; border-radius: 0.25rem; border: none;"
         [(colorPicker)]="list.color"
         [style.background]="list.color"
