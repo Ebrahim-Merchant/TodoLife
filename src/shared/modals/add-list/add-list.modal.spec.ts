@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { AddListModal } from './add-list.modal';
@@ -7,7 +7,7 @@ describe('AddNewListPage', () => {
   let component: AddListModal;
   let fixture: ComponentFixture<AddListModal>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AddListModal ],
       imports: [IonicModule.forRoot()]
