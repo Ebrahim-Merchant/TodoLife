@@ -32,5 +32,4 @@ export const AppTypes = {
     SHOW_PENDING: `SHOW_PENDING`,
     UPDATE_TODO_STATUS: `UPDATE_TODO_STATUS`,
 
-
 };

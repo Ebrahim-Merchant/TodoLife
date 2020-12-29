@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -17,14 +17,15 @@ export class ListItemComponent {
       this.formattedDateString = moment.default(dueDate).format('dddd, MMM Do YYYY');
     }
   }
+  get dueDute() {
+    return this.formattedDateString;
+  }
   @Input() color;
   @Input() listName;
   @Input() colorStyle = 'primary';
   formattedDateString: string;
-
-
   @Output() checkedChange = new EventEmitter<boolean>();
-  @Output()  divClicked = new EventEmitter<boolean>();
+  @Output() itemChanged = new EventEmitter<void>();
 
   constructor() { }
 

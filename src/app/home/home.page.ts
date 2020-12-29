@@ -1,13 +1,9 @@
 import { UtilService } from 'src/shared/services/util/util.service';
 import { ITodo, IList } from 'src/app/state/app.service';
-import { EditTaskModal } from 'src/shared/modals/edit-task/edit-task.modal';
 import { getList, getTodoList, visibilityFilter } from 'src/app/state/app.selector';
-import { AddListModal } from 'src/shared/modals/add-list/add-list.modal';
 import { Component, OnInit } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { ModalController } from '@ionic/angular';
-import { AddTaskModal } from 'src/shared/modals/add-task/add-task.modal';
 import { Store } from '@ngrx/store';
 import { AppTypes } from 'src/app/state/app.actions';
 
@@ -65,10 +61,10 @@ export class HomePage implements OnInit {
 
     this.list = this.store.select(getList).pipe(tap(lists => lists.map((listItem) => this.listItem[listItem.id] = listItem)));
 
-    this.todoList = combineLatest(
+    this.todoList = combineLatest([
       this.store.select(getTodoList),
       this.store.select(visibilityFilter)
-    ).pipe(map(([todo, filter]) => UtilService.filterValues(todo, filter)));
+    ]).pipe(map(([todo, filter]) => UtilService.filterValues(todo, filter)));
   }
 
 

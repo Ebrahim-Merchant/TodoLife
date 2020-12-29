@@ -1,0 +1,22 @@
+:host {
+  ion-item-sliding{
+    .ion-item {
+      .list-item-container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .list-item {
+          margin-right: auto;
+          padding: 1.5rem 1rem;
+          &.additional-info {
+            padding: 1rem;
+          }
+        }
+        .chip {
+          color: white;
+        }
+      }
+    }
+  }
+
+}
