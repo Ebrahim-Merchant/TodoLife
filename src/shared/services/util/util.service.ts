@@ -5,7 +5,7 @@ import { AddTaskModal } from 'src/shared/modals/add-task/add-task.modal';
 import { AddListModal } from 'src/shared/modals/add-list/add-list.modal';
 import { EditTaskModal } from 'src/shared/modals/edit-task/edit-task.modal';
 
-enum visibilityFilters {
+enum VisibilityFilter {
   COMPLETED = 'completed',
   ALL = 'all',
   PENDING = 'pending'
@@ -17,9 +17,9 @@ enum visibilityFilters {
 export class UtilService {
 
   static filterValues(todo, filterString) {
-    if (filterString === visibilityFilters.COMPLETED) {
+    if (filterString === VisibilityFilter.COMPLETED) {
       return todo.filter(todoItem => todoItem.status === true);
-    } else if (filterString === visibilityFilters.PENDING) {
+    } else if (filterString === VisibilityFilter.PENDING) {
       return todo.filter(todoItem => todoItem.status === false);
     }
     return todo;
@@ -42,7 +42,6 @@ export class UtilService {
     });
     return await modal.present();
   }
-
 
   async showEditTaskModal(props?) {
     const modal = await this.modalController.create({

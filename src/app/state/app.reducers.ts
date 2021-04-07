@@ -1,14 +1,19 @@
-import { AppService } from 'src/app/state/app.service';
-import { createReducer, Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { AppTypes } from './app.actions';
-import { ITodo, IList } from './app.service';
+import { IList, ITodo } from './app.service';
 
-const initialState = {
+export interface IAppState {
+  todo: Array<ITodo>,
+  lists: Array<IList>,
+  filter: string,
+  listFilter: string
+}
+
+const initialState: IAppState = {
   todo: [],
   lists: [],
-  selectedList: {},
-  updateVisibility: 'all',
-  updateListVisibility: 'all'
+  filter: 'all',
+  listFilter: 'all'
 };
 
 export interface AppActions extends Action {
@@ -16,9 +21,7 @@ export interface AppActions extends Action {
   lists?: [];
   newList: {};
   updatedTodoItem?: null;
-  updateVisibility: string;
-  updateListVisibility: string;
-
+  filter: string;
 }
 
 export function appReducer(state = initialState, action: AppActions) {
@@ -36,13 +39,11 @@ export function appReducer(state = initialState, action: AppActions) {
     case AppTypes.DELETE_LIST:
           return deleteListItem(state, action);
     case AppTypes.UPDATE_FILTER:
-        return Object.assign({}, state, { updateVisibility: action.updateVisibility });
+        return Object.assign({}, state, { filter: action.filter });
     case AppTypes.UPDATE_LIST_FILTER:
-        return Object.assign({}, state, { updateListVisibility: action.updateVisibility });
+        return Object.assign({}, state, { listFilter: action.filter });
     case AppTypes.UPDATE_TODO:
       return updateTodo(state, action);
-    case AppTypes.UPDATE_TODO_STATUS:
-        return updateTodo(state, action);
     case AppTypes.DELETE_TODO_FULFILLED:
       return Object.assign({}, state, action.todo);
     case AppTypes.GET_TODO_FULFILLED:

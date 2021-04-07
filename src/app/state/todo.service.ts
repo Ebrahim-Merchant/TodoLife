@@ -2,8 +2,8 @@ import { ITodo, ITodoService } from './todo.interface';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-@Injectable({providedIn: 'root'})
-export class TodoService implements ITodoService{
+@Injectable({ providedIn: 'root' })
+export class TodoService implements ITodoService {
 
   constructor() { }
 
@@ -19,5 +19,5 @@ export class TodoService implements ITodoService{
   removeTodoItem(todoItemId: string): void {
     throw new Error('Method not implemented.');
   }
-  
+
 }

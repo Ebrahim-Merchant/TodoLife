@@ -11,7 +11,7 @@ export class ColorService {
     return randomColor({ luminosity: 'dark' });
   }
 
-  LightenDarkenColor(col, amt) {
+  lightenDarkenColor(col, amt) {
     let usePound = false;
 
     if (col[0] === '#') {

@@ -13,6 +13,11 @@ export const getSelectedList = (listId: string) => createSelector(
       return state.app ? state.app.lists.find(listItem => listItem.id === listId) : null; }
   );
 
+export const getListById = (id?: string) => createSelector(
+    selectApp,
+    (state: any) => state.app ? state.app.lists : []
+  );
+
 export const getList = createSelector(
     selectApp,
     (state: any) => state.app ? state.app.lists : []
@@ -20,12 +25,12 @@ export const getList = createSelector(
 
 export const visibilityFilter = createSelector(
     selectApp,
-    (state: any) => state.app ? state.app.updateVisibility : null
+    (state: any) => state.app ? state.app.filter : null
   );
 
 export const listVisibilityFilter = createSelector(
     selectApp,
-    (state: any) => state.app ? state.app.updateListVisibility : null
+    (state: any) => state.app ? state.app.filter : null
   );
 
 export const getTodoList = createSelector(

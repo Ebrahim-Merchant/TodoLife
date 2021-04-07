@@ -1,5 +1,4 @@
 
-
 export const AppTypes = {
 
     ADD_TODO: `ADD_TODD`,
@@ -25,11 +24,6 @@ export const AppTypes = {
     DELETE_LIST: `DELETE_LIST`,
     UPDATE_LIST: `UPDATE_LIST`,
 
-
     UPDATE_FILTER: `UPDATE_FILTER`,
     UPDATE_LIST_FILTER: `UPDATE_LIST_FILTER`,
-    SHOW_ALL: `SHOW_ALL`,
-    SHOW_PENDING: `SHOW_PENDING`,
-    UPDATE_TODO_STATUS: `UPDATE_TODO_STATUS`,
-
 };

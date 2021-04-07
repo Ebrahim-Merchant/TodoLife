@@ -44,7 +44,7 @@
           *ngFor="let todoItem of todo"
           [(checked)]="todoItem.status"
           (checkedChange)="onCheckChange(todoItem)"
-          (divClicked)="utilsService.showEditTaskModal({ componentProps: { todo: todoItem}})"
+          (itemChanged)="utilsService.showEditTaskModal({ componentProps: { todo: todoItem}})"
           [taskTitle]="todoItem.taskTitle"
           [additionalInfo]="todoItem.extraDetails"
           [dueDate]="todoItem.dueDate"

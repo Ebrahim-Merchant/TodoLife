@@ -59,24 +59,25 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.filter = this.store.select(visibilityFilter);
 
-    this.list = this.store.select(getList).pipe(tap(lists => lists.map((listItem) => this.listItem[listItem.id] = listItem)));
+    this.list = this.store.select(getList)
+      .pipe(
+        tap((lists) => lists.map((listItem) => this.listItem[listItem.id] = listItem))
+      );
 
     this.todoList = combineLatest([
       this.store.select(getTodoList),
       this.store.select(visibilityFilter)
-    ]).pipe(map(([todo, filter]) => UtilService.filterValues(todo, filter)));
+    ]).pipe(
+      map(([todo, filter]) => UtilService.filterValues(todo, filter))
+    );
   }
 
 
-  onCheckChange(updatedTodoItem) {
+  onCheckChange(updatedTodoItem: ITodo) {
     this.store.dispatch({ type: AppTypes.UPDATE_TODO, updatedTodoItem });
   }
 
-  divClicked(updatedTodoItem) {
-    this.store.dispatch({ type: AppTypes.UPDATE_TODO, updatedTodoItem });
-  }
-
-  segmentChanged($event) {
-    this.store.dispatch({ type: AppTypes.UPDATE_FILTER, updateVisibility: $event.detail.value });
+  segmentChanged($event: any) {
+    this.store.dispatch({ type: AppTypes.UPDATE_FILTER, filter: $event.detail.value });
   }
 }

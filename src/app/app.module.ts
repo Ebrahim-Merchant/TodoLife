@@ -18,12 +18,11 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './state/app.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { IonicStorageModule } from '@ionic/storage';
-
+import { TranslateModule } from '@ngx-translate/core';
 
 export const reducer = {
   app: appReducer
 };
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +33,7 @@ export const reducer = {
     StoreModule.forRoot({}),
     HttpClientModule,
     ModalModule,
+    TranslateModule.forRoot({}),
     AngularFireModule.initializeApp(environment.firebase),
     IonicModule.forRoot(),
     AppRoutingModule,
