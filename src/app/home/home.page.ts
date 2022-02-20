@@ -1,26 +1,23 @@
-import { UtilService } from 'src/shared/services/util/util.service';
-import { ITodo, IList } from 'src/app/state/app.service';
-import { getList, getTodoList, visibilityFilter } from 'src/app/state/app.selector';
-import { Component, OnInit } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
-import { Observable, combineLatest } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { AppTypes } from 'src/app/state/app.actions';
+import { UtilService } from "src/shared/services/util/util.service";
+import { Component, OnInit } from "@angular/core";
+import { map, tap } from "rxjs/operators";
+import { Observable, combineLatest } from "rxjs";
+import { TodoService } from "../state/todo.service";
+import { IList, ITodo } from "../state/todo.interface";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"],
 })
 export class HomePage implements OnInit {
-
   /**
    * Observable of lists added by user
    *
-   * @type {Observable<IList>}
+   * @type {Observable<IList[]>}
    * @memberof HomePage
    */
-  list: Observable<IList>;
+  list: Observable<IList[]>;
 
   /**
    * TodoList a list of todo list items
@@ -49,34 +46,35 @@ export class HomePage implements OnInit {
   /**
    * Creates an instance of HomePage.
    * @param {ModalController} modalController
-   * @param {Store<any>} store
    * @memberof HomePage
    */
   constructor(
     public utilsService: UtilService,
-    private store: Store<any>) { }
+    private todoService: TodoService
+  ) {}
 
   ngOnInit(): void {
-    this.filter = this.store.select(visibilityFilter);
+    this.filter = this.todoService.getFilter();
 
-    this.list = this.store.select(getList).pipe(tap(lists => lists.map((listItem) => this.listItem[listItem.id] = listItem)));
+    this.list = this.todoService
+      .getListItems()
+      .pipe(
+        tap((lists) =>
+          lists.map((listItem) => (this.listItem[listItem.id] = listItem))
+        )
+      );
 
     this.todoList = combineLatest([
-      this.store.select(getTodoList),
-      this.store.select(visibilityFilter)
+      this.todoService.getTodoList(),
+      this.todoService.getFilter(),
     ]).pipe(map(([todo, filter]) => UtilService.filterValues(todo, filter)));
   }
 
-
-  onCheckChange(updatedTodoItem) {
-    this.store.dispatch({ type: AppTypes.UPDATE_TODO, updatedTodoItem });
+  onCheckChange(updatedTodoItem: ITodo) {
+    this.todoService.updateTodoItem(updatedTodoItem);
   }
 
-  divClicked(updatedTodoItem) {
-    this.store.dispatch({ type: AppTypes.UPDATE_TODO, updatedTodoItem });
-  }
-
-  segmentChanged($event) {
-    this.store.dispatch({ type: AppTypes.UPDATE_FILTER, updateVisibility: $event.detail.value });
+  segmentChanged($event: any) {
+    this.todoService.updateFilter($event.detail.value);
   }
 }

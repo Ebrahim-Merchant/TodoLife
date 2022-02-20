@@ -17,9 +17,16 @@ export interface IList {
 	color: string;
 }
 
+export enum VisibilityFilter {
+	COMPLETED = 'completed',
+	ALL = 'all',
+	PENDING = 'pending'
+}
+
+
 export interface ITodoService {
-  getTodoList(): Observable<ITodo>;
-  updateTodoList(todoItem: ITodo): void;
+  getTodoList(): Observable<ITodo[]>;
+  updateTodoItem(todoItem: ITodo): void;
   addTodoItem(todoItem: ITodo): void;
-  removeTodoItem(todoItemId: string): void;
+  removeTodoItem(todoItem: ITodo): void;
 }

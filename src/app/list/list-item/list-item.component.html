@@ -1,48 +1,46 @@
 <ion-item-sliding>
-	<ion-item-options side="start">
-		<ion-item-option (click)="itemChanged.emit(true)">
-			<ion-icon name="create-outline"></ion-icon>
-		</ion-item-option>
-	</ion-item-options>
+  <ion-item-options side="start">
+    <ion-item-option (click)="itemChanged.emit('edit')">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
 
-	<ion-item class="ion-item">
-		<div style="position: relative">
-			<ion-checkbox
-				mode="ios"
-				[checked]="checked"
-				(ionChange)="checkedChange.emit(!checked)"
-			></ion-checkbox>
-		</div>
+  <ion-item class="ion-item">
+    <div style="position: relative">
+      <ion-checkbox
+        mode="ios"
+        [checked]="checked"
+        (ionChange)="checkedChange.emit(!checked)">
+      </ion-checkbox>
+    </div>
 
-		<div class="list-item-container" (click)="itemChanged.emit()">
-			<div class="list-item" [class.additional-info]="additionalInfo">
-				<ion-label>{{ taskTitle }}</ion-label>
+    <div class="list-item-container" (click)="itemChanged.emit()">
+      <div class="list-item" [class.additional-info]="additionalInfo">
+        <ion-label>{{ taskTitle }}</ion-label>
         <ion-label
-          class="additional-info"
-					*ngIf="additionalInfo"
-					style="font: normal 11px/14px Segoe UI"
-					>{{ additionalInfo }}</ion-label
-				>
+          *ngIf="additionalInfo"
+          class="additional-info">
+            {{ additionalInfo }}
+          </ion-label>
         <ion-label
-          class="date"
-					*ngIf="formattedDateString"
-					style="font: normal 11px/14px Segoe UI"
-					>{{ formattedDateString }}</ion-label
-				>
-			</div>
+          *ngIf="dueDate"
+          class="date">
+            {{ dueDate }}
+          </ion-label>
+      </div>
       <ion-chip
         class="chip"
-				*ngIf="listName && color"
-				[ngStyle]="{ 'background-color': color }"
-			>
-				<ion-label>{{ listName }}</ion-label>
-			</ion-chip>
-		</div>
-	</ion-item>
+        *ngIf="listName && color"
+        [ngStyle]="{ 'background-color': color }"
+      >
+        <ion-label>{{ listName }}</ion-label>
+      </ion-chip>
+    </div>
+  </ion-item>
 
-	<ion-item-options side="end">
-		<ion-item-option (click)="itemChanged.emit(true)" color="danger">
-			<ion-icon name="trash-outline"></ion-icon>
-		</ion-item-option>
-	</ion-item-options>
+  <ion-item-options side="end">
+    <ion-item-option (click)="itemChanged.emit('trash')" color="danger">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
 </ion-item-sliding>

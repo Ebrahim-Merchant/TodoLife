@@ -1,5 +1,9 @@
 <ion-content>
-  <app-header [hasClose]="true" (closeClicked)="dimiss()" [title]="'Edit task'">
+  <app-header
+    [hasClose]="true"
+    (closeClicked)="dismiss()"
+    [title]="'Edit task'"
+  >
   </app-header>
 
   <form
@@ -10,19 +14,18 @@
       <ion-label color="dark-tint">Status</ion-label>
       <ion-checkbox
         [checked]="todo.status"
-        (ionChange)="todo.status = !todo.status"
+        (ionChange)="todoStatus(todo.status)"
         mode="ios"
-        slot="end">
+        slot="end"
+      >
       </ion-checkbox>
     </ion-item>
 
     <ion-item>
-      <ion-label color="dark-tint" position="floating"
-        >Task Name <span class="danger">*</span></ion-label>
-      <ion-input
-        [(ngModel)]="todo.taskTitle"
-        required="true"
-        name="taskTitle">
+      <ion-label color="dark-tint" position="floating">
+        Task Name 
+        <span class="danger">*</span></ion-label>
+      <ion-input [(ngModel)]="todo.taskTitle" required="true" name="taskTitle">
       </ion-input>
     </ion-item>
     <ion-label
@@ -42,7 +45,8 @@
         [(ngModel)]="todo.dueDate"
         name="dueDate"
         displayFormat="D MMM YYYY"
-        placeholder="MM DD YY">
+        placeholder="MM DD YY"
+      >
       </ion-datetime>
     </ion-item>
 
@@ -51,8 +55,10 @@
       <ion-select [value]="todo.listId" [(ngModel)]="todo.listId" name="listid">
         <ion-select-option
           *ngFor="let listItem of list | async"
-          [value]="listItem.id">
-          {{listItem.listName}}</ion-select-option>
+          [value]="listItem.id"
+        >
+          {{listItem.listName}}</ion-select-option
+        >
       </ion-select>
     </ion-item>
 

@@ -9,24 +9,23 @@ import * as moment from 'moment';
 export class ListItemComponent {
 
   readonly console = console;
+  _dueDate: string;
+  @Input() set dueDate(dueDate: string) {
+    if (dueDate) {
+      this._dueDate = moment.default(dueDate).format('dddd, MMM Do YYYY');
+    }
+  }
+  
+  get dueDate() {
+    return this._dueDate;
+  }
+
   @Input() checked;
   @Input() taskTitle;
   @Input() additionalInfo;
-  @Input() set dueDate(dueDate: string) {
-    if (dueDate) {
-      this.formattedDateString = moment.default(dueDate).format('dddd, MMM Do YYYY');
-    }
-  }
-  get dueDute() {
-    return this.formattedDateString;
-  }
   @Input() color;
   @Input() listName;
   @Input() colorStyle = 'primary';
-  formattedDateString: string;
   @Output() checkedChange = new EventEmitter<boolean>();
-  @Output() itemChanged = new EventEmitter<void>();
-
-  constructor() { }
-
+  @Output() itemChanged = new EventEmitter<'trash' | 'edit'>();
 }
