@@ -1,0 +1,14 @@
+@import "./../../scss/container";
+
+:host {
+    .form-container {
+        @include flex-form-container;
+        .form-button {
+            @include base-button-text;
+            margin-top: 2rem;
+            &.bottom {
+                margin-top: 1rem;
+            }
+        }
+    }
+}

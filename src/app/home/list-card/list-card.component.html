@@ -1,0 +1,13 @@
+<ion-card [ngStyle]="{background: color, color: 'white'}" class="fav-list-card">
+  <div class="container">
+  <ion-icon *ngIf="iconName" class="icon" [ngStyle]="{background: color}" [name]="iconName"></ion-icon>
+    <div class="text-container">
+        <ion-label class="text">
+          {{title}}
+        </ion-label>
+        <ion-label class="subtext">
+          {{subtitle}}
+        </ion-label>
+    </div>
+  </div>
+</ion-card>

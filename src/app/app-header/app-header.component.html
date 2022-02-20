@@ -1,0 +1,12 @@
+  <div class="header" [class.landing]="isLanding" [class.secondary]="!isPrimary">
+    <div class="close" *ngIf="hasClose" (click)="closeClicked.emit($event)"><ion-icon [name]="'close'" ></ion-icon></div>
+    <div class="back" (click)="backClicked.emit($event)" *ngIf="hasBack"></div>
+    <div class="title-container">
+      <h1 class="title">{{title}}</h1>
+      <p class="subtitle">{{subtitle}}</p>
+    </div>
+    <div *ngIf="hasEdit" class="edit" (click)="editClicked.emit($event)">Edit</div>
+  </div>
+<ng-content [class.increase]="isLanding"></ng-content>
+
+

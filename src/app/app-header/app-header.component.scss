@@ -1,0 +1,96 @@
+
+
+:host {
+    $primary: var(--ion-color-primary);
+    $primary-shade: var(--ion-color-primary-shade);
+
+    $secondary: var(--ion-color-secondary);
+    $secondary-shade: var(--ion-color-secondary-shade);
+
+
+    
+    .header {
+        height: 8rem;
+        display: flex;
+        border-radius: 0 0 3rem 0;
+        background: transparent linear-gradient(180deg, $primary 0%, $primary-shade 100%) 0% 0% no-repeat padding-box;
+        &.secondary {
+            background: transparent linear-gradient(180deg, $secondary 0%, $secondary-shade 100%) 0% 0% no-repeat padding-box;
+        }
+        align-items: center;
+
+        &.landing {
+            position: fixed;
+            width: 100%;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            height: 10rem;
+
+            .title-container {
+                padding-left: 1rem;
+                padding-top: 1.375rem;
+                padding-bottom: 2rem;
+
+                .title {
+                    font: Bold 30px/40px Segoe UI;
+                    text-align: left;
+                    margin: 0;
+                    padding-bottom: 0.25rem;
+                    letter-spacing: 0px;
+                    color: #fefeff;
+                    opacity: 1;
+                }
+
+                .subtitle {
+                    font: lighter 16px/21px Segoe UI;
+                    color: white;
+                    margin: 0;
+                }
+            }
+        }
+
+        .title-container {
+            .title {
+                font: Bold 30px/40px Segoe UI;
+                text-align: left;
+                margin: 0;
+                padding-bottom: 0.25rem;
+                letter-spacing: 0px;
+                color: #fefeff;
+                opacity: 1;
+            }
+
+            .subtitle {
+                font: lighter 16px/21px Segoe UI;
+                color: white;
+                margin: 0;
+            }
+        }
+
+        .back {
+            width: 10%;
+            margin: 1rem;
+            height: 22px;
+            background: url("./../../assets/icon/Icon\ material-arrow_back.svg") no-repeat center center;
+        }
+        .close {
+            margin: 1rem;
+            ion-icon {
+                width: 2rem;
+                height: 2rem;
+                color: white;
+            }
+        }
+        .edit {
+            font: bold 16px/21px Segoe UI;
+            color: white;
+            margin-left: auto;
+            padding: 1rem;
+        }
+
+        .increase {
+            height: 15rem;
+        }
+    }
+}

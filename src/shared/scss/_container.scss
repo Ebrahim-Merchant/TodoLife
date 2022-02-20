@@ -1,0 +1,10 @@
+@mixin flex-form-container($flex-direction: column) {
+    display: flex;
+    flex-direction: $flex-direction;
+    padding: 1rem;
+    width: 100%;
+}
+
+@mixin base-button-text {
+    font: bold 11px/14px Segoe UI;
+}

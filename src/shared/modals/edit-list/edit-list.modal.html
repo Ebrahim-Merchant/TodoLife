@@ -1,0 +1,44 @@
+<ion-content>
+  <app-header
+    [hasClose]="true"
+    (closeClicked)="dismiss()"
+    [title]="'Edit list'">
+  </app-header>
+
+  <form class="form-container" #editListForm="ngForm" (ngSubmit)="onSave(editListForm)">
+
+    <ion-item>
+      <ion-label color="dark-tint" position="floating">
+        List Name <span class="danger">*</span>
+      </ion-label>
+      <ion-input
+        [(ngModel)]="list.listName"
+        required
+        name="listTitle">
+      </ion-input>
+    </ion-item>
+      <ion-label
+      *ngIf="editListForm?.controls?.listTitle?.errors"
+      color="danger error-message">
+      This is a required value
+    </ion-label>
+
+    <ion-item>
+      <ion-label color="dark-tint">Color</ion-label>
+      <input
+        readonly
+        [cpPosition]="'left'"
+        [cpPositionOffset]="'50%'"
+        [cpPositionRelativeToArrow]="true"
+        style="width: 20%; border-radius: 0.25rem; border: none;"
+        [(colorPicker)]="list.color"
+        [style.background]="list.color"
+      />
+    </ion-item>
+  
+
+    <ion-button type="submit" class="form-button"> Save List </ion-button>
+    <ion-button color="danger" (click)="onDelete()" class="form-button bottom"> Delete List </ion-button>
+  </form>
+
+</ion-content>
