@@ -17,11 +17,15 @@ const routes: Routes = [
   {
     path: 'add-new-list',
     loadChildren: () => import('../shared/modals/add-list/add-list.module').then( m => m.AddListModalModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })

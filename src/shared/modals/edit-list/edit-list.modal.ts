@@ -1,12 +1,7 @@
-import { Location } from '@angular/common';
-import { AppTypes } from 'src/app/state/app.actions';
-import { AppService, ITodo, IList } from 'src/app/state/app.service';
 import { ModalController } from '@ionic/angular';
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import * as uuid from 'uuid';
-import { Store } from '@ngrx/store';
-import { v4 as uuidv4 } from 'uuid';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { TodoService } from 'src/app/state/todo.service';
+import { IList } from 'src/app/state/todo.interface';
 
 @Component({
   selector: 'app-edit-task',
@@ -19,11 +14,11 @@ export class EditListModal implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private location: Location,
-    private store: Store<any>) { }
+    private todoService: TodoService
+    ) { }
 
   ngOnInit() {
-    this.list = { ...this.list };
+    this.list = Object.assign(this.list);
   }
 
   dismiss() {
@@ -34,13 +29,13 @@ export class EditListModal implements OnInit {
 
   onSave(editForm) {
     if (editForm.form.valid) {
-      this.store.dispatch({ type: AppTypes.UPDATE_LIST, newList: this.list});
+      this.todoService.updateListItem(this.list)
       this.dismiss();
     }
   }
 
   onDelete() {
-    this.store.dispatch({ type: AppTypes.DELETE_LIST,  newList: this.list});
+    this.todoService.removeListItem(this.list)
     this.dismiss();
   }
 

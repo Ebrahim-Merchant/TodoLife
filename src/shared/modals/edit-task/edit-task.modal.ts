@@ -1,12 +1,10 @@
-import { getList } from 'src/app/state/app.selector';
-import { AppTypes } from 'src/app/state/app.actions';
-import { AppService, ITodo } from 'src/app/state/app.service';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import * as uuid from 'uuid';
-import { Store } from '@ngrx/store';
 import { v4 as uuidv4 } from 'uuid';
+import { TodoService } from 'src/app/state/todo.service';
+import {  NgForm } from '@angular/forms';
+import { ITodo } from 'src/app/state/todo.interface';
 
 
 @Component({
@@ -17,34 +15,38 @@ import { v4 as uuidv4 } from 'uuid';
 export class EditTaskModal implements OnInit {
 
   list: Observable<any>;
-  color: any;
   @Input() todo: ITodo;
 
   constructor(
     private modalController: ModalController,
-    private store: Store<any>) { }
+    private todoService: TodoService
+    ) { }
 
   ngOnInit() {
-    this.list = this.store.select(getList);
-    this.todo = { ...this.todo };
+    this.list = this.todoService.getListItems();
+    this.todo = {...this.todo};
   }
 
-  dimiss() {
+  dismiss() {
     this.modalController.dismiss({
       dismissed: true
     });
   }
 
-  onSave(inputform) {
-    if (inputform.form.valid) {
-      this.store.dispatch({ type: AppTypes.UPDATE_TODO, updatedTodoItem: this.todo});
-      this.dimiss();
+  onSave(taskForm: NgForm) {
+    if (taskForm.form.valid) {
+      this.todoService.updateTodoItem(this.todo)
+      this.dismiss();
     }
   }
 
   onDelete() {
-    this.store.dispatch({ type: AppTypes.DELETE_TODO, todo: [this.todo]});
-    this.dimiss();
+    this.todoService.removeTodoItem(this.todo)
+    this.dismiss();
+  }
+
+  todoStatus(checked: boolean) {
+    this.todo.status = !checked;
   }
 
 }
