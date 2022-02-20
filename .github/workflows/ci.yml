@@ -4,7 +4,7 @@
 name: Test CI
 
 on:
-  pull-request:
+  pull_request:
     branches:
       - develop
 
