@@ -1,15 +1,12 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FavoriteListCardComponent } from './list-card.component';
 
 describe('FavoriteListCardComponent', () => {
   let component: FavoriteListCardComponent;
   let fixture: ComponentFixture<FavoriteListCardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FavoriteListCardComponent ]
     })

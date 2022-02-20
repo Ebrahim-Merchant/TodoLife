@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { EditListModal } from './edit-list.modal';
@@ -7,7 +7,7 @@ describe('AddTaskPage', () => {
   let component: EditListModal;
   let fixture: ComponentFixture<EditListModal>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EditListModal ],
       imports: [IonicModule.forRoot()]

@@ -65,10 +65,10 @@ export class HomePage implements OnInit {
 
     this.list = this.store.select(getList).pipe(tap(lists => lists.map((listItem) => this.listItem[listItem.id] = listItem)));
 
-    this.todoList = combineLatest(
+    this.todoList = combineLatest([
       this.store.select(getTodoList),
       this.store.select(visibilityFilter)
-    ).pipe(map(([todo, filter]) => UtilService.filterValues(todo, filter)));
+    ]).pipe(map(([todo, filter]) => UtilService.filterValues(todo, filter)));
   }
 
 
