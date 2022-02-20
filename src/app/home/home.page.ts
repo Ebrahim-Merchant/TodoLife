@@ -1,14 +1,14 @@
-import { UtilService } from "src/shared/services/util/util.service";
-import { Component, OnInit } from "@angular/core";
-import { map, tap } from "rxjs/operators";
-import { Observable, combineLatest } from "rxjs";
-import { TodoService } from "../state/todo.service";
-import { IList, ITodo } from "../state/todo.interface";
+import { UtilService } from 'src/shared/services/util/util.service';
+import { Component, OnInit } from '@angular/core';
+import { map, tap } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { TodoService } from '../state/todo.service';
+import { IList, ITodo } from '../state/todo.interface';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "home.page.html",
-  styleUrls: ["home.page.scss"],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
   /**

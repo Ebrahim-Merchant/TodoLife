@@ -1,15 +1,15 @@
-import { Observable } from "rxjs";
-import { ModalController } from "@ionic/angular";
-import { Component, OnInit, Input } from "@angular/core";
-import { v4 as uuidv4 } from "uuid";
-import { TodoService } from "src/app/state/todo.service";
-import { NgForm } from "@angular/forms";
-import { ITodo } from "src/app/state/todo.interface";
+import { Observable } from 'rxjs';
+import { ModalController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
+import { TodoService } from 'src/app/state/todo.service';
+import { NgForm } from '@angular/forms';
+import { ITodo } from 'src/app/state/todo.interface';
 
 @Component({
-  selector: "app-add-task",
-  templateUrl: "./add-task.modal.html",
-  styleUrls: ["./add-task.modal.scss"],
+  selector: 'app-add-task',
+  templateUrl: './add-task.modal.html',
+  styleUrls: ['./add-task.modal.scss'],
 })
 export class AddTaskModal implements OnInit {
   @Input() listValue;

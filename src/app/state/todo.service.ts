@@ -1,23 +1,18 @@
-import {
-  IList,
-  ITodo,
-  ITodoService,
-  VisibilityFilter,
-} from "./todo.interface";
-import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
-import { Storage } from "@ionic/storage";
+import { IList, ITodo, ITodoService, VisibilityFilter } from './todo.interface';
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { Storage } from '@ionic/storage';
 
 export enum STORAGE_KEY {
-  TODO_LIST = "todoList",
-  LIST_ITEMS = "listItems",
-  LIST_TODO_MAP = "listTodoMap",
-  FILTER = "filter",
-  LIST_FILTER = "listFilter",
+  TODO_LIST = 'todoList',
+  LIST_ITEMS = 'listItems',
+  LIST_TODO_MAP = 'listTodoMap',
+  FILTER = 'filter',
+  LIST_FILTER = 'listFilter',
 }
 
-export type FILTER = "";
-@Injectable({ providedIn: "root" })
+export type FILTER = '';
+@Injectable({ providedIn: 'root' })
 export class TodoService implements ITodoService {
   todoList$ = new Subject<ITodo[]>();
   lists$ = new Subject<IList[]>();
@@ -222,7 +217,7 @@ export class TodoService implements ITodoService {
         return;
       }
       const updateListItems = listItems.filter(
-        (listItem) => listItem.id !== listItem.id
+        (listI) => listI.id !== listItem.id
       );
       this.storage.set(STORAGE_KEY.LIST_ITEMS, updateListItems);
       this.lists$.next(updateListItems);

@@ -7,7 +7,6 @@ import * as moment from 'moment';
   styleUrls: ['./list-item.component.scss'],
 })
 export class ListItemComponent {
-
   readonly console = console;
   _dueDate: string;
   @Input() set dueDate(dueDate: string) {
@@ -15,7 +14,6 @@ export class ListItemComponent {
       this._dueDate = moment.default(dueDate).format('dddd, MMM Do YYYY');
     }
   }
-  
   get dueDate() {
     return this._dueDate;
   }

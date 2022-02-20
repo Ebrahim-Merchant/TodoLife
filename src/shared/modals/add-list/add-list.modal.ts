@@ -1,14 +1,14 @@
-import { ColorService } from "../../services/color/color.service";
-import { Component, OnInit } from "@angular/core";
-import { v4 as uuidv4 } from "uuid";
-import { ModalController } from "@ionic/angular";
-import { TodoService } from "src/app/state/todo.service";
-import { IList } from "src/app/state/todo.interface";
+import { ColorService } from '../../services/color/color.service';
+import { Component, OnInit } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
+import { ModalController } from '@ionic/angular';
+import { TodoService } from 'src/app/state/todo.service';
+import { IList } from 'src/app/state/todo.interface';
 
 @Component({
-  selector: "app-add-list-modal",
-  templateUrl: "./add-list.modal.html",
-  styleUrls: ["./add-list.modal.scss"],
+  selector: 'app-add-list-modal',
+  templateUrl: './add-list.modal.html',
+  styleUrls: ['./add-list.modal.scss'],
 })
 export class AddListModal implements OnInit {
   list: IList = {
