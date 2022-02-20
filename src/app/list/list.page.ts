@@ -42,11 +42,11 @@ export class ListPage implements OnInit {
 
   ngOnInit() {
     this.listId = this.route.snapshot.paramMap.get('id');
-    this.listPage = combineLatest(
+    this.listPage = combineLatest([
       this.store.select(getSelectedList(this.listId)),
       this.store.select(getTodoItems(this.listId)),
       this.store.select(listVisibilityFilter)
-    ).pipe(
+    ]).pipe(
         map(([list, todo, filter]) => ({ list, todo: UtilService.filterValues(todo, filter) })),
         tap((listItem) => listItem.list ? null : this.location.back()),
         tap((listItem) => this.setColor(listItem.list.color))
