@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy:github": "ng build --base-href 'https://ebrahim-merchant.github.io/Todora/' --prod && npx ngh --no-silent --dir=www/"
+    "predeploy": "ng build --base-href 'https://ebrahim-merchant.github.io/TodoLife/' --prod",
+    "deploy": "gh-pages -d www"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +36,7 @@
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "ngx-color-picker": "^9.1.0",
+    "pspdfkit": "^2022.1.2",
     "randomcolor": "^0.5.4",
     "rxjs": "~6.6.3",
     "tslib": "^1.14.1",
@@ -62,6 +64,7 @@
     "cordova-plugin-whitelist": "^1.3.4",
     "firebase-tools": "^7.12.1",
     "fuzzy": "^0.1.3",
+    "gh-pages": "^3.2.3",
     "inquirer": "^6.5.2",
     "inquirer-autocomplete-prompt": "^1.3.0",
     "jasmine-core": "~3.4.0",
